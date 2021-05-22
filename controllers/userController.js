@@ -2,6 +2,20 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
+exports.getUsers = async (req, res, next) => {
+  try {
+    const result = await User.find();
+
+    return res.status(200).send({
+      message: "Users",
+      Users: result,
+    });
+  }
+  catch(error) {
+    return res.status(500).send(error);
+  }
+}
+
 exports.createUser = async (req, res, next) => {
   try {
     let user = req.body;
