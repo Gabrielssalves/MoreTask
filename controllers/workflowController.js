@@ -4,7 +4,10 @@ exports.getUserWorkflows = async (req, res, next) => {
   try {
     const user = req.user;
 
-    const result = await WorkflowModel.find({ Ob_Owner: user.idUser });
+    const result = await WorkflowModel.find({ Ob_Owner: user.idUser })    
+      .populate('Ls_Tasks')
+      .populate('Ob_Owner')
+      .exec();
 
     return res.status(200).send({
       message: "User's Workflows",
@@ -50,6 +53,28 @@ exports.createWorkflow = async (req, res, next) => {
       workflow: result,
     });
   } catch (error) {
+    return res.status(500).send({ error: error });
+  }
+};
+
+exports.updateWorkflowStatus = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const body = req.body;
+    const idWorkflow = req.params.idWorkflow;
+
+    const result = await WorkflowModel.findById(idWorkflow);
+    if (result.Ob_Owner.valueOf().toString() !== user.idUser)
+      return res.status(400).send({ message: "Workflow not found!" });
+
+    await result.updateOne({ Ls_Status: body.statusList }, { new: true });
+
+    return res.status(201).send({
+      message: "Workflow's status sucessfully updated",
+      workflow: result,
+    });
+  } catch (error) {
+    console.log(error);
     return res.status(500).send({ error: error });
   }
 };

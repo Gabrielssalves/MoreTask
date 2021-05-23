@@ -13,37 +13,37 @@ const TaskSchema = new mongoose.Schema({
   },
   Ls_Comments: [
     {
-      Ob_Comment: {
-        Ob_User: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-          require: true,
-        },
-        Ds_Comment: {
-          type: String,
-        },
-        Dt_Created: {
-            type: Date,
-            default: Date.now()
-        }
+      Ob_User: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        require: true,
+      },
+      Ds_Comment: {
+        type: String,
+      },
+      Dt_Created: {
+        type: Date,
+        default: Date.now(),
       },
     },
   ],
   Ls_Checklist: [
     {
-      Ob_Checklist: {
-        Ds_Item: {
-          type: String,
-        },
-        Fg_Done: {
-          type: Boolean,
-        },
+      Ds_Item: {
+        type: String,
+      },
+      Fg_Done: {
+        type: Boolean,
       },
     },
   ],
-  Ds_Status: {
-    type: String,
-    Required: true,
+  Ob_Status: {
+    Ds_Status: {
+      type: String,
+    },
+    Vl_Order: {
+      type: Number
+    }
   },
   Ds_Marking: {
     type: String,
@@ -71,11 +71,9 @@ const TaskSchema = new mongoose.Schema({
   },
   Ls_Users: [
     {
-      Ob_User: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        require: true,
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      require: true,
     },
   ],
 });

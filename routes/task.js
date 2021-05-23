@@ -4,6 +4,8 @@ const login = require('../middleware/login');
 
 const TaskController = require('../controllers/TaskController')
 
+// router.get('/', login.mandatory, TaskController.getUserTasks);
 router.post('/', login.mandatory, TaskController.createTask);
+router.put('/:idTask', login.mandatory, TaskController.updateTaskStatus);
 
 module.exports = router;

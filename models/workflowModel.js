@@ -7,23 +7,28 @@ const WorkflowSchema = new mongoose.Schema({
   },
   Ls_Tasks: [
     {
-      Ob_Task: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        require: true,
-      },
-    },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task"
+    }
   ],
-  Ls_Users: [
+  Ls_Status: [
     {
-      Ob_User: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+      Ds_Status: {
+        type: String,
         require: true,
       },
-    },
+      Vl_Order: {
+        type: Number,
+        require: true
+      },
+      Ls_Users: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User"
+        },
+      ],
+    }
   ],
-  Ls_Status: [String],
   Ds_Marking: {
     type: String,
   },
