@@ -1,4 +1,5 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
+import StaffItem from "./StaffItem";
 
 const StaffListModal = () => {
     const [staff, setStaff] = useState([]);
@@ -31,6 +32,12 @@ const StaffListModal = () => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
+                        <ul className="collection p-0">
+                            {!loading &&
+                                staff.map(staff => (
+                                    <StaffItem staff={staff} key={staff.id}/>
+                                ))}
+                        </ul>
                     </div>
                     <div className="modal-footer">
                         <button
@@ -38,13 +45,6 @@ const StaffListModal = () => {
                             className="btn btn-secondary"
                             data-bs-dismiss="modal">
                             Close
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-primary"
-                            // onClick={onSubmit}
-                            >
-                            Add
                         </button>
                     </div>
                 </div>

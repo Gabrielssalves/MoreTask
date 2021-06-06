@@ -28,12 +28,12 @@ const Sidebar = () => {
                                 Home
                                 </NavText>
                         </NavItem>
-                        <NavItem eventKey="tasks">
+                        <NavItem eventKey="task">
                             <NavIcon>
                                 <i className="fa fa-fw fa-tasks" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
                             <NavText>
-                                Tasks
+                                Task
                                 </NavText>
                         </NavItem>
                         <NavItem eventKey="workflow">
@@ -54,11 +54,6 @@ const Sidebar = () => {
                         </NavItem>
                     </SideNav.Nav>
                 </SideNav>
-                <main>
-                    <Route path="/" />
-                    <Route path="/home" />
-                    <Route path="/tasks" />
-                </main>
             </React.Fragment>
         )}
         />

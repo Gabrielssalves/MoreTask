@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from "./components/layout/Navbar";
 import Sidebar from "./components/layout/Sidebar";
 import Workflow from "./components/workflow/Workflow";
+// import TaskScreen from "./components/workflow/TaskScreen";
 
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -13,6 +14,7 @@ const App = () => {
         <Navbar />
         <Sidebar />
         <div className="container d-flex justify-content-center">
+          {/* <Route exact path="/task" component={TaskScreen} /> */}
           <Route exact path="/workflow" component={Workflow} />
         </div>
       </Fragment>

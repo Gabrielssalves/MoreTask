@@ -29,7 +29,7 @@ const Workflow = () => {
 
     return (
         <Fragment>
-            <ul className="collection width-header ">
+            <ul className="collection width-header p-0">
                 <li className="collection-header">
                     <h3 className="center">Workflow</h3>
                 </li>
@@ -44,7 +44,6 @@ const Workflow = () => {
             <EditTaskModal />
             <StaffListModal />
         </Fragment>
-
     )
 }
 
