@@ -1,0 +1,55 @@
+li {
+    list-style-type: none;
+}
+
+.sidenav---sidenav---_2tBP {
+    background-color: #0000ff !important;
+}
+
+.navbar-brand {
+    font-size: 1.59rem;
+    font-weight: 600;
+    margin-left: 1%;
+}
+
+.collection {
+    margin: 2.5rem 0 1rem 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    padding: 2.5%;
+}
+
+.collection .collection-item {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.center {
+    text-align: center;
+}
+
+.width-header {
+    width: 70%;
+}
+
+.float-right {
+    float: right;
+}
+
+.btn-modal-workflow {
+    position: absolute;
+    right: 80px;
+    bottom: 50px;
+    height: 60px;
+    width: 60px;
+}
+
+.btn-primary{
+    background-color: #0000ff;
+}
+

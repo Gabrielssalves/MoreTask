@@ -1,11 +1,22 @@
 import './App.css';
-import React, {Fragment} from 'react';
+import Navbar from "./components/layout/Navbar";
+import Sidebar from "./components/layout/Sidebar";
+import Workflow from "./components/workflow/Workflow";
 
-function App() {
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+const App = () => {
   return (
-    <Fragment>
-    <h1>Fodase</h1>
-    </Fragment>
+    <Router>
+      <Fragment>
+        <Navbar />
+        <Sidebar />
+        <div className="container d-flex justify-content-center">
+          <Route exact path="/workflow" component={Workflow} />
+        </div>
+      </Fragment>
+    </Router>
   );
 }
 

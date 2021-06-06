@@ -1,0 +1,73 @@
+{
+  "workflow": [
+    {
+      "id": 1,
+      "nm_task": "Die",
+      "ds_task": "just Die",
+      "attention": true,
+      "ls_comments": [
+        {
+          "ob_user": "Mother Fucker",
+          "ds_comment": "did he die?",
+          "dt_created": "2019-01-01"
+        }
+      ],
+      "ob_status": [
+        {
+          "ds_status": "Pending",
+          "vl_order": "1"
+        }
+      ],
+      "ds_marking": "1",
+      "ds_color": "2",
+      "dt_create": "2019-01-01",
+      "dt_start": "2019-01-01",
+      "dt_prediction": "2019-01-01",
+      "dt_finish": "2019-01-01",
+      "ob_owner": "Mother Fucker"
+    },
+    {
+      "id": 2,
+      "nm_task": "Die too",
+      "ds_task": "just Die too",
+      "attention": false,
+      "ls_comments": [
+        {
+          "ob_user": "Uncle Fucker",
+          "ds_comment": "did we just watch someone die?",
+          "dt_created": "2019-01-02"
+        }
+      ],
+      "ob_status": [
+        {
+          "ds_status": "Pending",
+          "vl_order": "1"
+        }
+      ],
+      "ds_marking": "1",
+      "ds_color": "2",
+      "dt_create": "2019-01-02",
+      "dt_start": "2019-01-02",
+      "dt_prediction": "2019-01-02",
+      "dt_finish": "2019-01-02",
+      "ob_owner": "Uncle Fucker"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Mother Fucker",
+      "email": "mother.fucker@moretask.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Uncle Fucker",
+      "email": "uncle.fucker@moretask.com"
+    },
+    {
+      "firstName": "Lala",
+      "lastName": "Kruger",
+      "id": 3
+    }
+  ]
+}
