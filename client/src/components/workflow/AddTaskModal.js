@@ -26,7 +26,7 @@ const AddTaskModal = () => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div className="input-group mb-1">
+                        <div className="input-group mb-2">
                             <span className="input-group-text" id="basic-addon1">Task Name</span>
                             <input
                                 className="form-control"
@@ -37,7 +37,7 @@ const AddTaskModal = () => {
                                 onChange={e => setTaskName(e.target.value)}
                             />
                         </div>
-                        <div className="input-group mb-1">
+                        <div className="input-group mb-2">
                             <div className="input-group-text">
                                 <input
                                     className="form-check-input mt-0"
@@ -54,7 +54,7 @@ const AddTaskModal = () => {
                                 value="Set As Main Task"
                             />
                         </div>
-                        <div className="input-group mb-3">
+                        <div className="input-group mb-2">
                             <select
                                 className="form-select"
                                 name="user"
@@ -65,6 +65,16 @@ const AddTaskModal = () => {
                                 <option value="Jane Doe">Jane Doe</option>
                                 <option value="Adam Smith">Adam Smith</option>
                             </select>
+                        </div>
+                        <div class="form-group mb-2">
+                            <div class="col-10 mb-2">
+                                <span className="input-group-text" id="basic-addon">Task Starting Date</span>
+                                <input class="form-control" type="datetime-local" id="dt_start" />
+                            </div>
+                            <div class="col-10">
+                                <span className="input-group-text" id="basic-addon1">Task Forecast Date</span>
+                                <input class="form-control" type="datetime-local" id="dt_prediction" />
+                            </div>
                         </div>
                         <div className="input-group mb-1">
                             <span className="input-group-text" id="basic-addon1">Description</span>

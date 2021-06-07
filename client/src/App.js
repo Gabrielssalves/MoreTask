@@ -18,7 +18,7 @@ const App = () => {
           <Sidebar />
           <div className="container d-flex justify-content-center">
             <Route exact path="/task" component={TaskScreen} />
-            <Route exact path="/workflow" component={Workflow} />
+            <Route exact path="/" component={Workflow} />
           </div>
         </Fragment>
       </Router>

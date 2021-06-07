@@ -18,14 +18,14 @@ const Sidebar = () => {
                     }}
                 >
                     <SideNav.Toggle />
-                    <SideNav.Nav defaultSelected="home">
+                    <SideNav.Nav defaultSelected="">
 
-                        <NavItem eventKey="home">
+                        <NavItem eventKey="">
                             <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                <i className="fa fa-fw fa-table" style={{ fontSize: '1.75em' }} />
                             </NavIcon>
                             <NavText>
-                                Home
+                                Workflow
                                 </NavText>
                         </NavItem>
                         <NavItem eventKey="task">
@@ -34,14 +34,6 @@ const Sidebar = () => {
                             </NavIcon>
                             <NavText>
                                 Task
-                                </NavText>
-                        </NavItem>
-                        <NavItem eventKey="workflow">
-                            <NavIcon>
-                                <i className="fa fa-fw fa-table" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-                            <NavText>
-                                Workflow
                                 </NavText>
                         </NavItem>
                         <NavItem eventKey="signout">
