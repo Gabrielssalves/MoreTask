@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import StaffItem from "./StaffItem";
+import { getStaff } from "../../actions/staffActions";
 
-const StaffListModal = () => {
-    const [staff, setStaff] = useState([]);
-    const [loading, setLoading] = useState(false);
-
+const StaffListModal = ({ getStaff, staff: { staff, loading}}) => {
     useEffect(() => {
         getStaff();
         // eslint-disable-next-line
     }, []);
 
-    const getStaff = async () => {
-        setLoading(true);
-        const res = await fetch("/users");
-        const data = await res.json();
-
-        setStaff(data);
-        setLoading(false);
-    }
-
-    if (loading) {
+    if (loading || staff === null) {
         return <h4>Loading...</h4>
     }
 
@@ -53,4 +44,17 @@ const StaffListModal = () => {
     )
 }
 
-export default StaffListModal
+StaffListModal.propTypes = {
+    staff: PropTypes.object.isRequired,
+    getStaff: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+    staff: state.staff
+});
+
+
+export default connect(
+    mapStateToProps,
+    { getStaff }
+)(StaffListModal);

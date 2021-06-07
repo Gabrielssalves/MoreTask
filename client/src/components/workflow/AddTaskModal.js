@@ -62,8 +62,8 @@ const AddTaskModal = () => {
                                 onChange={e => setUser(e.target.value)}
                             >
                                 <option defaultValue value="" disabled>Set Assignee</option>
-                                <option value="Mother Fucker">Mother Fucker</option>
-                                <option value="Uncle Fucker">Uncle Fucker</option>
+                                <option value="Jane Doe">Jane Doe</option>
+                                <option value="Adam Smith">Adam Smith</option>
                             </select>
                         </div>
                         <div className="input-group mb-1">

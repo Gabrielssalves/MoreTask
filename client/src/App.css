@@ -4,6 +4,7 @@ li {
 
 .sidenav---sidenav---_2tBP {
     background-color: #0000ff !important;
+    position: fixed !important;
 }
 
 .navbar-brand {
@@ -82,3 +83,8 @@ li {
     background-color: #0000ff;
 }
 
+.code-text{
+    font-family: 'Courier New', monospace;
+    text-align: justify;
+    font-size: 0.8rem;
+}
