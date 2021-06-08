@@ -39,8 +39,9 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
                                 <textarea
                                     className="form-control form-control-lg code-text mt-2"
                                     rows="10"
-                                    disabled readonly>
-                                    {tasks[0].ds_task}
+                                    disabled readOnly
+                                    value={tasks[0].ds_task}>
+                                    
                                 </textarea>
                             </li>
 
@@ -71,7 +72,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
                                     <option value="Completed">Completed</option>
                                 </select>
                             </li>
-                            <li classname="collection-item">
+                            <li className="collection-item">
                                 <span className="h6 ms-4 text-secondary">Comments</span>
                             </li>
 
@@ -89,7 +90,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
                                         rows="5"
                                     />
                                 </div>
-                                <button type="button" class="btn btn-primary float-end me-4 my-2">Send</button>
+                                <button type="button" className="btn btn-primary float-end me-4 my-2">Send</button>
                             </li>
                         </div>
 

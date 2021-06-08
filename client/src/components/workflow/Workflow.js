@@ -45,6 +45,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks}) => {
 
 Workflow.propTypes = {
     task: PropTypes.object.isRequired,
+    getTasks: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

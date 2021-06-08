@@ -1,20 +1,43 @@
 import React, { useState } from 'react'
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addTask } from "../../actions/taskActions"
 import Toast from 'react-bootstrap/Toast'
 // import 'bootstrap/dist/css/bootstrap.css';
 
-const AddTaskModal = () => {
-    const [taskName, setTaskName] = useState("");
-    const [taskDescription, setTaskDescription] = useState("");
+const AddTaskModal = ({ addTask }) => {
+    const [nm_task, setNm_Task] = useState("");
+    const [ds_task, setDs_Task] = useState("");
     const [attention, setAttention] = useState(false);
-    const [user, setUser] = useState("");
-    const [show, setShow] = useState(false);
+    const [ob_owner, setOb_Owner] = useState("");
+    const [dt_start, setDt_Start] = useState(new Date());
+    const [dt_prediction, setDt_Prediction] = useState(new Date());
+    const [errorToastShow, setErrorToastShow] = useState(false);
 
     const onSubmit = () => {
-        if (taskName === "" || user === "") {
-            console.log("vazio");
-            setShow(true);
+        if (nm_task === "" || ob_owner === "") {
+            setErrorToastShow(true);
+        } else {
+            const newTask = {
+                nm_task,
+                ds_task,
+                attention,
+                ob_owner,
+                dt_create: new Date(),
+                dt_start,
+                dt_prediction,
+                ob_status: { ds_status: "Pending", vl_order: "1"}
+            }
+            addTask(newTask);
+
+            //clear fields
+            setNm_Task("");
+            setDs_Task("");
+            setAttention(false);
+            setOb_Owner("");
+            setDt_Start(new Date());
+            setDt_Prediction(new Date());
         }
-        console.log(taskName, user, taskDescription, attention)
     }
 
     return (
@@ -32,9 +55,9 @@ const AddTaskModal = () => {
                                 className="form-control"
                                 placeholder="Eg: Deploy Last Version.."
                                 type="text"
-                                name="taskName"
-                                value={taskName}
-                                onChange={e => setTaskName(e.target.value)}
+                                name="nm_task"
+                                value={nm_task}
+                                onChange={e => setNm_Task(e.target.value)}
                             />
                         </div>
                         <div className="input-group mb-2">
@@ -57,23 +80,35 @@ const AddTaskModal = () => {
                         <div className="input-group mb-2">
                             <select
                                 className="form-select"
-                                name="user"
-                                value={user}
-                                onChange={e => setUser(e.target.value)}
+                                name="ob_owner"
+                                value={ob_owner}
+                                onChange={e => setOb_Owner(e.target.value)}
                             >
                                 <option defaultValue value="" disabled>Set Assignee</option>
                                 <option value="Jane Doe">Jane Doe</option>
                                 <option value="Adam Smith">Adam Smith</option>
                             </select>
                         </div>
-                        <div class="form-group mb-2">
-                            <div class="col-10 mb-2">
+                        <div className="form-group mb-2">
+                            <div className="col-10 mb-2">
                                 <span className="input-group-text" id="basic-addon">Task Starting Date</span>
-                                <input class="form-control" type="datetime-local" id="dt_start" />
+                                <input
+                                    className="form-control"
+                                    type="datetime-local"
+                                    id="dt_start"
+                                    value={dt_start}
+                                    onChange={e => setDt_Start(e.target.value)}
+                                />
                             </div>
-                            <div class="col-10">
+                            <div className="col-10">
                                 <span className="input-group-text" id="basic-addon1">Task Forecast Date</span>
-                                <input class="form-control" type="datetime-local" id="dt_prediction" />
+                                <input
+                                    className="form-control"
+                                    type="datetime-local"
+                                    id="dt_prediction"
+                                    value={dt_prediction}
+                                    onChange={e => setDt_Prediction(e.target.value)}
+                                />
                             </div>
                         </div>
                         <div className="input-group mb-1">
@@ -82,12 +117,12 @@ const AddTaskModal = () => {
                                 className="form-control"
                                 placeholder="Type here a detailed description of the task.."
                                 type="text"
-                                name="taskDescription"
-                                value={taskDescription}
-                                onChange={e => setTaskDescription(e.target.value)}
+                                name="ds_task"
+                                value={ds_task}
+                                onChange={e => setDs_Task(e.target.value)}
                             />
                         </div>
-                        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                        <Toast onClose={() => setErrorToastShow(false)} show={errorToastShow} delay={3000} autohide>
                             <Toast.Header>
                                 <strong className="me-2">Validation Error {' '}</strong>
                             </Toast.Header>
@@ -99,13 +134,13 @@ const AddTaskModal = () => {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal">
-                            Close
+                            Cancel
                         </button>
                         <button
                             type="button"
                             className="btn btn-primary"
                             onClick={onSubmit}>
-                            Add
+                            Create
                         </button>
                     </div>
                 </div>
@@ -114,4 +149,8 @@ const AddTaskModal = () => {
     )
 }
 
-export default AddTaskModal
+AddTaskModal.propTypes = {
+    addTask: PropTypes.func.isRequired,
+}
+
+export default connect(null, { addTask })(AddTaskModal);

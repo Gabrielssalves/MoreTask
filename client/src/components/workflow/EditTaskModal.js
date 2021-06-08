@@ -1,20 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { updateTask } from "../../actions/taskActions"
 import Toast from 'react-bootstrap/Toast'
 // import 'bootstrap/dist/css/bootstrap.css';
 
-const EditTaskModal = () => {
-    const [taskName, setTaskName] = useState("");
-    const [taskDescription, setTaskDescription] = useState("");
+const EditTaskModal = ({ current, updateTask }) => {
+    const [nm_task, setNm_Task] = useState("");
+    const [ds_task, setDs_Task] = useState("");
     const [attention, setAttention] = useState(false);
-    const [user, setUser] = useState("");
-    const [show, setShow] = useState(false);
+    const [ob_owner, setOb_Owner] = useState("");
+    const [dt_start, setDt_Start] = useState(new Date());
+    const [dt_prediction, setDt_Prediction] = useState(new Date());
+    const [errorToastShow, setErrorToastShow] = useState(false);
+
+    useEffect(() => {
+        if(current) {
+            setNm_Task(current.nm_task);
+            setDs_Task(current.ds_task);
+            setAttention(current.attention);
+            setOb_Owner(current.taskName);
+            setDt_Start(current.dt_start);
+            setDt_Prediction(current.dt_prediction);
+        }
+    },[current]);
 
     const onSubmit = () => {
-        if (taskName === "" || user === "") {
+        if (nm_task === "" || ob_owner === "") {
             console.log("vazio");
-            setShow(true);
+            setErrorToastShow(true);
+        } else {
+            const updTask = {
+                id: current.id,
+                nm_task,
+                ds_task,
+                attention,
+                ob_owner,
+                dt_start,
+                dt_prediction
+            }
+            updateTask(updTask);
+
+            //clear fields
+            setNm_Task("");
+            setDs_Task("");
+            setAttention(false);
+            setOb_Owner("");
+            setDt_Start(new Date());
+            setDt_Prediction(new Date());
         }
-        console.log(taskName, user, taskDescription, attention)
     }
 
     return (
@@ -26,18 +60,18 @@ const EditTaskModal = () => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div className="input-group mb-1">
+                        <div className="input-group mb-2">
                             <span className="input-group-text" id="basic-addon1">Task Name</span>
                             <input
                                 className="form-control"
                                 placeholder="Eg: Deploy Last Version.."
                                 type="text"
-                                name="taskName"
-                                value={taskName}
-                                onChange={e => setTaskName(e.target.value)}
+                                name="nm_task"
+                                value={nm_task}
+                                onChange={e => setNm_Task(e.target.value)}
                             />
                         </div>
-                        <div className="input-group mb-1">
+                        <div className="input-group mb-2">
                             <div className="input-group-text">
                                 <input
                                     className="form-check-input mt-0"
@@ -54,17 +88,39 @@ const EditTaskModal = () => {
                                 value="Set As Main Task"
                             />
                         </div>
-                        <div className="input-group mb-3">
+                        <div className="input-group mb-2">
                             <select
                                 className="form-select"
-                                name="user"
-                                value={user}
-                                onChange={e => setUser(e.target.value)}
+                                name="ob_owner"
+                                value={ob_owner}
+                                onChange={e => setOb_Owner(e.target.value)}
                             >
                                 <option defaultValue value="" disabled>Set Assignee</option>
-                                <option value="Mother Fucker">Mother Fucker</option>
-                                <option value="Uncle Fucker">Uncle Fucker</option>
+                                <option value="Jane Doe">Jane Doe</option>
+                                <option value="Adam Smith">Adam Smith</option>
                             </select>
+                        </div>
+                        <div className="form-group mb-2">
+                            <div className="col-10 mb-2">
+                                <span className="input-group-text" id="basic-addon">Task Starting Date</span>
+                                <input
+                                    className="form-control"
+                                    type="datetime-local"
+                                    id="dt_start"
+                                    value={dt_start}
+                                    onChange={e => setDt_Start(e.target.value)}
+                                />
+                            </div>
+                            <div className="col-10">
+                                <span className="input-group-text" id="basic-addon1">Task Forecast Date</span>
+                                <input
+                                    className="form-control"
+                                    type="datetime-local"
+                                    id="dt_prediction"
+                                    value={dt_prediction}
+                                    onChange={e => setDt_Prediction(e.target.value)}
+                                />
+                            </div>
                         </div>
                         <div className="input-group mb-1">
                             <span className="input-group-text" id="basic-addon1">Description</span>
@@ -72,12 +128,12 @@ const EditTaskModal = () => {
                                 className="form-control"
                                 placeholder="Type here a detailed description of the task.."
                                 type="text"
-                                name="taskDescription"
-                                value={taskDescription}
-                                onChange={e => setTaskDescription(e.target.value)}
+                                name="ds_task"
+                                value={ds_task}
+                                onChange={e => setDs_Task(e.target.value)}
                             />
                         </div>
-                        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                        <Toast onClose={() => setErrorToastShow(false)} show={errorToastShow} delay={3000} autohide>
                             <Toast.Header>
                                 <strong className="me-2">Validation Error {' '}</strong>
                             </Toast.Header>
@@ -89,19 +145,29 @@ const EditTaskModal = () => {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal">
-                            Close
+                            Cancel
                         </button>
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={onSubmit}>
-                            Add
+                            onClick={onSubmit}
+                            data-bs-dismiss="modal">
+                            Update
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
+};
+
+EditTaskModal.propTypes = {
+    current: PropTypes.object,
+    updateTask: PropTypes.func.isRequired
 }
 
-export default EditTaskModal
+const mapStateToProps = state => ({
+    current: state.task.current
+})
+
+export default connect (mapStateToProps, { updateTask }) (EditTaskModal)
