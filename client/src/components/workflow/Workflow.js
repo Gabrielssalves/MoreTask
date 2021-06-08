@@ -23,7 +23,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks}) => {
     return (
         <Fragment>
             <ul className="collection width-header mt-4 p-0">
-                <li className="collection-header mt-4">
+                <li className="collection-header collection-item mt-4">
                     <h3 className="center">Workflow</h3>
                 </li>
                 {!loading && tasks.length === 0 ? (

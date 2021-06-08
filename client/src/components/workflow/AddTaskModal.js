@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addTask } from "../../actions/taskActions"
+import StaffSelectOptions from "../staff/StaffSelectOptions"
 import Toast from 'react-bootstrap/Toast'
 // import 'bootstrap/dist/css/bootstrap.css';
 
@@ -26,7 +27,7 @@ const AddTaskModal = ({ addTask }) => {
                 dt_create: new Date(),
                 dt_start,
                 dt_prediction,
-                ob_status: { ds_status: "Pending", vl_order: "1"}
+                ob_status: { ds_status: "Pending", vl_order: "1" }
             }
             addTask(newTask);
 
@@ -85,8 +86,7 @@ const AddTaskModal = ({ addTask }) => {
                                 onChange={e => setOb_Owner(e.target.value)}
                             >
                                 <option defaultValue value="" disabled>Set Assignee</option>
-                                <option value="Jane Doe">Jane Doe</option>
-                                <option value="Adam Smith">Adam Smith</option>
+                                <StaffSelectOptions />
                             </select>
                         </div>
                         <div className="form-group mb-2">
@@ -139,7 +139,9 @@ const AddTaskModal = ({ addTask }) => {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={onSubmit}>
+                            onClick={onSubmit}
+                            data-bs-dismiss="modal"
+                        >
                             Create
                         </button>
                     </div>

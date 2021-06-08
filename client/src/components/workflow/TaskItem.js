@@ -2,8 +2,8 @@ import React from 'react';
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { deleteTask, setCurrent } from "../../actions/taskActions"
-import { confirmAlert } from 'react-confirm-alert'; 
-import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import PropTypes from "prop-types";
 
 const TaskItem = ({ task, deleteTask, setCurrent }) => {
@@ -12,17 +12,17 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
             title: 'Confirm deletion',
             message: 'Do you really intend to delete this task?',
             buttons: [
-              {
-                label: 'Yes',
-                onClick: () => deleteTask(task.id)
-              },
-              {
-                label: 'No',
-                onClick: () => console.log("action cancelled")
-              }
+                {
+                    label: 'Yes',
+                    onClick: () => deleteTask(task.id)
+                },
+                {
+                    label: 'No',
+                    onClick: () => console.log("action cancelled")
+                }
             ]
-          });
-        
+        });
+
     }
 
     return (

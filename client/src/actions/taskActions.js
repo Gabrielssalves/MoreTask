@@ -5,6 +5,7 @@ import {
     ADD_TASK,
     DELETE_TASK,
     UPDATE_TASK,
+    SEARCH_TASKS,
     SET_CURRENT,
     CLEAR_CURRENT
 } from "./types";
@@ -38,7 +39,7 @@ export const getTasks = () => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.data
+            payload: err.response.statusText
         })
     }
 };
@@ -65,7 +66,7 @@ export const addTask = (task) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.data
+            payload: err.response.statusText
         })
     }
 };
@@ -86,7 +87,7 @@ export const deleteTask = (id) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.data
+            payload: err.response.statusText
         })
     }
 };
@@ -113,7 +114,27 @@ export const updateTask = task => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASKS_ERROR,
-            payload: err.response.data
+            payload: err.response.statusText
+        })
+    }
+};
+
+// search tasks from server
+export const searchTasks = (text) => async dispatch => {
+    try {
+        setLoading();
+
+        const res = await fetch(`/workflow?q=${text}`);
+        const data = await res.json();
+
+        dispatch({
+            type: SEARCH_TASKS,
+            payload: data
+        });
+    } catch (err) {
+        dispatch({
+            type: TASKS_ERROR,
+            payload: err.response.statusText
         })
     }
 };

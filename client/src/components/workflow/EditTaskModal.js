@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateTask } from "../../actions/taskActions"
+import StaffSelectOptions from "../staff/StaffSelectOptions"
 import Toast from 'react-bootstrap/Toast'
 // import 'bootstrap/dist/css/bootstrap.css';
 
@@ -15,7 +16,7 @@ const EditTaskModal = ({ current, updateTask }) => {
     const [errorToastShow, setErrorToastShow] = useState(false);
 
     useEffect(() => {
-        if(current) {
+        if (current) {
             setNm_Task(current.nm_task);
             setDs_Task(current.ds_task);
             setAttention(current.attention);
@@ -23,7 +24,7 @@ const EditTaskModal = ({ current, updateTask }) => {
             setDt_Start(current.dt_start);
             setDt_Prediction(current.dt_prediction);
         }
-    },[current]);
+    }, [current]);
 
     const onSubmit = () => {
         if (nm_task === "" || ob_owner === "") {
@@ -96,8 +97,7 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 onChange={e => setOb_Owner(e.target.value)}
                             >
                                 <option defaultValue value="" disabled>Set Assignee</option>
-                                <option value="Jane Doe">Jane Doe</option>
-                                <option value="Adam Smith">Adam Smith</option>
+                                <StaffSelectOptions />
                             </select>
                         </div>
                         <div className="form-group mb-2">
@@ -170,4 +170,4 @@ const mapStateToProps = state => ({
     current: state.task.current
 })
 
-export default connect (mapStateToProps, { updateTask }) (EditTaskModal)
+export default connect(mapStateToProps, { updateTask })(EditTaskModal)

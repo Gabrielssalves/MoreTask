@@ -19,7 +19,7 @@ export const getStaff = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: STAFF_ERROR,
-      // payload: err.response.statusText
+      payload: err.response.statusText
     });
   }
 };
