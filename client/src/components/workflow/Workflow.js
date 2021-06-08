@@ -38,9 +38,6 @@ const Workflow = ({ task: { tasks, loading }, getTasks}) => {
             <StaffListModal />
         </Fragment>
     )
-
-    
-
 }
 
 Workflow.propTypes = {

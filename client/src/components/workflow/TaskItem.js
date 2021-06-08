@@ -30,10 +30,10 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
             <div>
                 <a
                     href="#edit-task-modal"
-                    data-bs-toggle="modal"
-                    data-bs-target="#edit-task-modal"
                     className={`modal-trigger text-decoration-none h5 ${task.attention ? 'text-danger' : 'text-primary'
                         }`}
+                    data-bs-toggle="modal"
+                    data-bs-target="#edit-task-modal"
                     onClick={() => setCurrent(task)}
                 >
                     {task.nm_task}

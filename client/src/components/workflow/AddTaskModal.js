@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { addTask } from "../../actions/taskActions"
 import StaffSelectOptions from "../staff/StaffSelectOptions"
 import Toast from 'react-bootstrap/Toast'
-// import 'bootstrap/dist/css/bootstrap.css';
 
 const AddTaskModal = ({ addTask }) => {
     const [nm_task, setNm_Task] = useState("");

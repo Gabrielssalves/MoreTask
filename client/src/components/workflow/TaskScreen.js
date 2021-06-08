@@ -77,7 +77,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
                             </li>
 
                             {/* <li>
-                                //comentarios anteriores
+                                //add comments
                             </li> */}
 
                             <li>
