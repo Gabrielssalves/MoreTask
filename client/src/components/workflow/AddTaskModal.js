@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addTask } from "../../actions/taskActions"
 import StaffSelectOptions from "../staff/StaffSelectOptions"
-import Toast from 'react-bootstrap/Toast'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddTaskModal = ({ addTask }) => {
     const [nm_task, setNm_Task] = useState("");
@@ -11,15 +12,18 @@ const AddTaskModal = ({ addTask }) => {
     const [ob_owner, setOb_Owner] = useState("");
     const [dt_start, setDt_Start] = useState(new Date());
     const [dt_prediction, setDt_Prediction] = useState(new Date());
-    const [errorToastShow, setErrorToastShow] = useState(false);
+
+    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark" });
+    const taskAddedToast = () => toast("Task Created Successfully!", {autoClose : 2000});
 
     const onSubmit = () => {
         if (nm_task === "" || ob_owner === "") {
-            setErrorToastShow(true);
+            validationErrorToast();
         } else {
             const newTask = {
                 nm_task,
                 ds_task,
+                ls_comments: [],
                 ob_owner,
                 dt_create: new Date(),
                 dt_start,
@@ -27,6 +31,7 @@ const AddTaskModal = ({ addTask }) => {
                 ds_status: "On Hold"
             }
             addTask(newTask);
+            taskAddedToast();
 
             //clear fields
             setNm_Task("");
@@ -41,6 +46,7 @@ const AddTaskModal = ({ addTask }) => {
         <div className="modal fade" id="add-task-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
+                    <ToastContainer />
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">Create New Task</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -103,12 +109,6 @@ const AddTaskModal = ({ addTask }) => {
                                 onChange={e => setDs_Task(e.target.value)}
                             />
                         </div>
-                        <Toast onClose={() => setErrorToastShow(false)} show={errorToastShow} delay={3000} autohide>
-                            <Toast.Header>
-                                <strong className="me-2">Validation Error {' '}</strong>
-                            </Toast.Header>
-                            <Toast.Body>Please Insert a Name and Assignee for the Task</Toast.Body>
-                        </Toast>
                     </div>
                     <div className="modal-footer">
                         <button
@@ -121,10 +121,10 @@ const AddTaskModal = ({ addTask }) => {
                             type="button"
                             className="btn btn-primary"
                             onClick={onSubmit}
-                            data-bs-dismiss="modal"
                         >
                             Create
                         </button>
+                        <button onClick={taskAddedToast}>Notify!</button>
                     </div>
                 </div>
             </div>

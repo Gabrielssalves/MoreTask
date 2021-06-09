@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateTask } from "../../actions/taskActions"
 import StaffSelectOptions from "../staff/StaffSelectOptions"
-import Toast from 'react-bootstrap/Toast'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const EditTaskModal = ({ current, updateTask }) => {
     const [nm_task, setNm_Task] = useState("");
@@ -12,13 +14,15 @@ const EditTaskModal = ({ current, updateTask }) => {
     const [dt_start, setDt_Start] = useState(new Date());
     const [dt_prediction, setDt_Prediction] = useState(new Date());
     const [ds_status, setDs_Status] = useState("");
-    const [errorToastShow, setErrorToastShow] = useState(false);
+
+    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark" });
+    const taskUpdatedToast = () => toast("Task Updated Successfully!", {autoClose : 2000});
 
     useEffect(() => {
         if (current) {
             setNm_Task(current.nm_task);
             setDs_Task(current.ds_task);
-            setOb_Owner(current.taskName);
+            setOb_Owner(current.ob_owner);
             setDt_Start(current.dt_start);
             setDt_Prediction(current.dt_prediction);
             setDs_Status(current.ds_status);
@@ -27,8 +31,7 @@ const EditTaskModal = ({ current, updateTask }) => {
 
     const onSubmit = () => {
         if (nm_task === "" || ob_owner === "") {
-            console.log("vazio");
-            setErrorToastShow(true);
+            validationErrorToast();
         } else {
             const updTask = {
                 id: current.id,
@@ -40,14 +43,7 @@ const EditTaskModal = ({ current, updateTask }) => {
                 ds_status
             }
             updateTask(updTask);
-
-            //clear fields
-            setNm_Task("");
-            setDs_Task("");
-            setOb_Owner("");
-            setDt_Start(new Date());
-            setDt_Prediction(new Date());
-            setDs_Status("");
+            taskUpdatedToast();
         }
     }
 
@@ -55,6 +51,7 @@ const EditTaskModal = ({ current, updateTask }) => {
         <div className="modal fade" id="edit-task-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
+                    <ToastContainer />
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">Edit Task</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -130,12 +127,6 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 onChange={e => setDs_Task(e.target.value)}
                             />
                         </div>
-                        <Toast onClose={() => setErrorToastShow(false)} show={errorToastShow} delay={3000} autohide>
-                            <Toast.Header>
-                                <strong className="me-2">Validation Error {' '}</strong>
-                            </Toast.Header>
-                            <Toast.Body>Please Insert a Name and Assignee for the Task</Toast.Body>
-                        </Toast>
                     </div>
                     <div className="modal-footer">
                         <button
@@ -147,8 +138,7 @@ const EditTaskModal = ({ current, updateTask }) => {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={onSubmit}
-                            data-bs-dismiss="modal">
+                            onClick={onSubmit}>
                             Update
                         </button>
                     </div>

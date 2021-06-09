@@ -1,11 +1,16 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
-import { getTasks, updateTask } from "../../actions/taskActions"
+import { getTasks, updateTask } from "../../actions/taskActions";
+import CommentItem from "./CommentItem";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
     const [ds_status, setDs_Status] = useState("");
+
+    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {ds_status}</span>)
 
     useEffect(() => {
         getTasks();
@@ -22,11 +27,17 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
             ds_status
         }
         updateTask(updTask);
+        taskUpdatedStatusToast();
     }
+
+    //hardcoded to task[0]
+    //no method to add commentary
+    //comment_id should also be created for each new comment, to be used as key on props
 
     return (
         <Fragment>
-            <ul className="collection with-header w-75 p-0 mt-4 ms-5">
+            <ToastContainer />
+            <ul className="collection with-header w-75 p-0 mt-4 ms-5 border border-secondary">
                 <li className="collection-header">
                     <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
                     <span className="h6 mt-2 text-secondary"> Current Task</span>
@@ -45,16 +56,12 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                             <li className="collection-item">
                                 <span className="h6 ms-1 text-secondary">Task Description</span>
                                 <br />
-                                <textarea
-                                    className="form-control form-control-lg code-text mt-2"
-                                    rows="10"
-                                    disabled readOnly
-                                    value={tasks[0].ds_task}
-                                >
-                                </textarea>
+                                <div className="comment-textarea ms-1 mt-1 text-secondary">
+                                    {tasks[0].ds_task}
+                                </div>
                             </li>
 
-                            <li className="collection-item ">
+                            <li className="collection-item ms-2 ">
                                 <span className="text-secondary">
                                     <span className="text-dark">Created by: </span>
                                     {tasks[0].ob_owner}
@@ -69,10 +76,10 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                     <Moment format="MMMM Do YYYY, h:mm A">{tasks[0].dt_start}</Moment>
                                 </span>
                             </li>
-                            <li className="collection-item pb-4 mb-2">
+                            <li className="collection-item pb-4">
                                 <span className="h6 ms-1 text-secondary">Task Status</span>
                                 <select
-                                    className="form-select mt-3"
+                                    className="form-select mt-1"
                                     name="ds_status"
                                     value={tasks[0].ds_status}
                                     onChange={e => setDs_Status(e.target.value)}
@@ -89,18 +96,20 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                 >
                                     Update Status
                                 </button>
-                                <br /><br />
+                                <br />
                             </li>
                             <li className="collection-item">
-                                <span className="h6 ms-4 text-secondary">Comments</span>
+                                <span className="h6 ms-1 text-secondary">Comments</span>
                             </li>
 
-                            {/* <li>
-                                //add comments
-                            </li> */}
-
-                            <li>
-                                <div className="mx-4 mt-3">
+                            {!loading && tasks[0].ls_comments.length === 0 ? (
+                                <p className="center mt-3">No comments to show...</p>
+                            ) : (
+                                tasks[0].ls_comments.map(ls_comments => <CommentItem ls_comments={ls_comments} key={ls_comments.comment_id}/>)
+                            )}
+                            
+                            <li className="collection-item">
+                                <div className="mx-1 mt-2 ">
                                     <textarea
                                         className="form-control"
                                         placeholder="Add new comment..."
@@ -109,7 +118,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
                                         rows="5"
                                     />
                                 </div>
-                                <button type="button" className="btn btn-primary float-end me-4 my-2">Send</button>
+                                <button type="button" className="btn btn-primary float-end me-2 my-2">Send</button>
                             </li>
                         </div>
 

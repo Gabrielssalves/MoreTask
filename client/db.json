@@ -3,16 +3,38 @@
     {
       "nm_task": "Task 1",
       "ds_task": "task 1 desc",
-      "ob_owner": "Adam Smith",
+      "ls_comments": [
+        {
+          "ob_user": "Adam Smith",
+          "ds_comment": "Test 1",
+          "dt_created": "2021-06-09T17:44:06.877Z",
+          "comment_id": 1
+        }
+      ],
+      "ob_owner": "Jane Doe",
       "dt_create": "2021-06-08T17:44:06.877Z",
       "dt_start": "2021-06-18T14:43",
       "dt_prediction": "2021-06-28T14:44",
-      "ds_status": "On Hold",
+      "ds_status": "Completed",
       "id": 1
     },
     {
       "nm_task": "Tarefa 2",
       "ds_task": "tasas",
+      "ls_comments": [
+        {
+          "ob_user": "Adam Smith",
+          "ds_comment": "Test 1",
+          "dt_created": "2021-06-09T17:44:06.877Z",
+          "comment_id": 1
+        },
+        {
+          "ob_user": "Adam Smith",
+          "ds_comment": "Test 2",
+          "dt_created": "2021-06-09T18:44:06.877Z",
+          "comment_id": 2
+        }
+      ],
       "ob_owner": "Jane Doe",
       "dt_create": "2021-06-08T18:14:20.252Z",
       "dt_start": "2021-06-22T15:14",
@@ -23,12 +45,37 @@
     {
       "nm_task": "Mais um",
       "ds_task": "srser",
+      "ls_comments": [
+        {
+          "ob_user": "Adam Smith",
+          "ds_comment": "Test 1",
+          "dt_created": "2021-06-09T17:44:06.877Z",
+          "comment_id": 1
+        },
+        {
+          "ob_user": "Adam Smith",
+          "ds_comment": "Test 2",
+          "dt_created": "2021-06-09T18:44:06.877Z",
+          "comment_id": 2
+        }
+      ],
       "ob_owner": "Jane Doe",
       "dt_create": "2021-06-08T18:14:29.483Z",
       "dt_start": "2021-06-08T18:14:20.253Z",
       "dt_prediction": "2021-06-08T18:14:20.253Z",
       "ds_status": "In Progress",
       "id": 3
+    },
+    {
+      "nm_task": "dfdfg",
+      "ds_task": "",
+      "ls_comments": [],
+      "ob_owner": "Karl Marx",
+      "dt_create": "2021-06-09T13:06:19.397Z",
+      "dt_start": "2021-06-09T13:05:06.231Z",
+      "dt_prediction": "2021-06-09T13:05:06.231Z",
+      "ds_status": "On Hold",
+      "id": 5
     }
   ],
   "users": [
