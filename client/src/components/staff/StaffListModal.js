@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import StaffItem from "./StaffItem";
 import { getStaff } from "../../actions/staffActions";
+import Spinner from "../layout/Spinner";
 
 const StaffListModal = ({ getStaff, staff: { staff, loading}}) => {
     useEffect(() => {
@@ -11,7 +12,7 @@ const StaffListModal = ({ getStaff, staff: { staff, loading}}) => {
     }, []);
 
     if (loading || staff === null) {
-        return <h4>Loading...</h4>
+        return <Spinner />
     }
 
     return (

@@ -124,7 +124,6 @@ const AddTaskModal = ({ addTask }) => {
                         >
                             Create
                         </button>
-                        <button onClick={taskAddedToast}>Notify!</button>
                     </div>
                 </div>
             </div>

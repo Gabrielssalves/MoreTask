@@ -7,6 +7,7 @@ import AddBtn from "../layout/AddBtn";
 import AddTaskModal from "./AddTaskModal";
 import EditTaskModal from "./EditTaskModal";
 import StaffListModal from "../staff/StaffListModal";
+import Spinner from "../layout/Spinner";
 
 const Workflow = ({ task: { tasks, loading }, getTasks }) => {
 
@@ -17,7 +18,7 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
 
 
     if (loading || tasks === null) {
-        return <h4>Loading...</h4>
+        return <Spinner />
     }
 
     return (

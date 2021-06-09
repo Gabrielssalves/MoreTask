@@ -6,6 +6,7 @@ import { getTasks, updateTask } from "../../actions/taskActions";
 import CommentItem from "./CommentItem";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from "../layout/Spinner";
 
 const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
     const [ds_status, setDs_Status] = useState("");
@@ -18,7 +19,7 @@ const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
     }, []);
 
     if (loading || tasks === null) {
-        return <h4>Loading...</h4>
+        return <Spinner />
     }
 
     const onSubmit = () => {
