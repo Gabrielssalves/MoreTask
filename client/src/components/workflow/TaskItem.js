@@ -7,6 +7,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import PropTypes from "prop-types";
 
 const TaskItem = ({ task, deleteTask, setCurrent }) => {
+
     const onDelete = () => {
         confirmAlert({
             title: 'Confirm deletion',

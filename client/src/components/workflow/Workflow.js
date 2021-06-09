@@ -16,7 +16,6 @@ const Workflow = ({ task: { tasks, loading }, getTasks }) => {
         // eslint-disable-next-line
     }, []);
 
-
     if (loading || tasks === null) {
         return <Spinner />
     }
