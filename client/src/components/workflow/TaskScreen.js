@@ -11,7 +11,7 @@ import Spinner from "../layout/Spinner";
 const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
     const [ds_status, setDs_Status] = useState("");
 
-    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {ds_status}</span>)
+    const taskUpdatedStatusToast = () => toast(<span>Task Status Updated to {ds_status}</span>, {toastId: "custom-id-success"})
 
     useEffect(() => {
         getTasks();

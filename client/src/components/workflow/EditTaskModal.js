@@ -15,8 +15,8 @@ const EditTaskModal = ({ current, updateTask }) => {
     const [dt_prediction, setDt_Prediction] = useState(new Date());
     const [ds_status, setDs_Status] = useState("");
 
-    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark" });
-    const taskUpdatedToast = () => toast("Task Updated Successfully!", {autoClose : 2000});
+    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
+    const taskUpdatedToast = () => toast("Task Updated Successfully!", {autoClose : 2000, toastId: "custom-id-success"});
 
     useEffect(() => {
         if (current) {

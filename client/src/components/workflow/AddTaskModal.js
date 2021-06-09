@@ -13,8 +13,9 @@ const AddTaskModal = ({ addTask }) => {
     const [dt_start, setDt_Start] = useState(new Date());
     const [dt_prediction, setDt_Prediction] = useState(new Date());
 
-    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark" });
-    const taskAddedToast = () => toast("Task Created Successfully!", {autoClose : 2000});
+    const validationErrorToast = () => toast("Please Insert a Name and Assignee for the Task.", { progressClassName: "Toastify__progress-bar--dark", toastId: "custom-id-error" });
+
+    const taskAddedToast = () => toast("Task Created Successfully!", {autoClose : 2000, toastId: "custom-id-success"});
 
     const onSubmit = () => {
         if (nm_task === "" || ob_owner === "") {
