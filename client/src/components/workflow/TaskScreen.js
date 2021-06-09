@@ -1,10 +1,11 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
-import { getTasks } from "../../actions/taskActions"
+import { getTasks, updateTask } from "../../actions/taskActions"
 
-const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
+const TaskScreen = ({ getTasks, task: { tasks, loading }, updateTask }) => {
+    const [ds_status, setDs_Status] = useState("");
 
     useEffect(() => {
         getTasks();
@@ -15,9 +16,17 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
         return <h4>Loading...</h4>
     }
 
+    const onSubmit = () => {
+        const updTask = {
+            id: tasks[0].id,
+            ds_status
+        }
+        updateTask(updTask);
+    }
+
     return (
         <Fragment>
-            <ul className="collection width-header p-0 mt-4">
+            <ul className="collection with-header w-75 p-0 mt-4 ms-5">
                 <li className="collection-header">
                     <i className="fa fa-fw fa-thumbtack ms-1 mt-2" />
                     <span className="h6 mt-2 text-secondary"> Current Task</span>
@@ -40,8 +49,8 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
                                     className="form-control form-control-lg code-text mt-2"
                                     rows="10"
                                     disabled readOnly
-                                    value={tasks[0].ds_task}>
-                                    
+                                    value={tasks[0].ds_task}
+                                >
                                 </textarea>
                             </li>
 
@@ -64,13 +73,23 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
                                 <span className="h6 ms-1 text-secondary">Task Status</span>
                                 <select
                                     className="form-select mt-3"
-                                    name="status"
+                                    name="ds_status"
+                                    value={tasks[0].ds_status}
+                                    onChange={e => setDs_Status(e.target.value)}
                                 >
                                     <option defaultValue value="" disabled>Set Assignee</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Started">Started</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="In Progress">In Progress</option>
                                     <option value="Completed">Completed</option>
                                 </select>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary float-end me-1 my-2"
+                                    onClick={onSubmit}
+                                >
+                                    Update Status
+                                </button>
+                                <br /><br />
                             </li>
                             <li className="collection-item">
                                 <span className="h6 ms-4 text-secondary">Comments</span>
@@ -102,7 +121,8 @@ const TaskScreen = ({ getTasks, task: { tasks, loading } }) => {
 }
 
 TaskScreen.propTypes = {
-    getTasks: PropTypes.func.isRequired
+    getTasks: PropTypes.func.isRequired,
+    updateTask: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -111,5 +131,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getTasks }
+    { getTasks, updateTask }
 )(TaskScreen)

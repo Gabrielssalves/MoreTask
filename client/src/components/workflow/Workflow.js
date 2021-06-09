@@ -8,7 +8,7 @@ import AddTaskModal from "./AddTaskModal";
 import EditTaskModal from "./EditTaskModal";
 import StaffListModal from "../staff/StaffListModal";
 
-const Workflow = ({ task: { tasks, loading }, getTasks}) => {
+const Workflow = ({ task: { tasks, loading }, getTasks }) => {
 
     useEffect(() => {
         getTasks();
@@ -22,16 +22,45 @@ const Workflow = ({ task: { tasks, loading }, getTasks}) => {
 
     return (
         <Fragment>
-            <ul className="collection width-header mt-4 p-0">
-                <li className="collection-header collection-item mt-4">
-                    <h3 className="center">Workflow</h3>
-                </li>
-                {!loading && tasks.length === 0 ? (
-                    <p className="center">No task to show...</p>
-                ) : (
-                    tasks.map(task => <TaskItem task={task} key={task.id} />)
-                )}
-            </ul>
+            <div id="kaban">
+                <div id="scroller">
+                    <div id="boards">
+                        <div className="board" id="board1">
+                            <header>On hold</header>
+                            <div className="cards" id="b1">
+                                {!loading && tasks.length === 0 ? (
+                                    <p className="center">No task to show...</p>
+                                ) : (
+                                    tasks.filter(task => task.ds_status === "On Hold").map(task => <TaskItem task={task} key={task.id} />)
+
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="board" id="board2">
+                            <header>In Progress</header>
+                            <div className="cards" id="b2">
+                                {!loading && tasks.length === 0 ? (
+                                    <p className="center">No task to show...</p>
+                                ) : (
+                                    tasks.filter(task => task.ds_status === "In Progress").map(task => <TaskItem task={task} key={task.id} />)
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="board" id="board3">
+                            <header>Completed</header>
+                            <div className="cards" id="b3">
+                                {!loading && tasks.length === 0 ? (
+                                    <p className="center">No task to show...</p>
+                                ) : (
+                                    tasks.filter(task => task.ds_status === "Completed").map(task => <TaskItem task={task} key={task.id} />)
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <AddBtn />
             <AddTaskModal />
             <EditTaskModal />

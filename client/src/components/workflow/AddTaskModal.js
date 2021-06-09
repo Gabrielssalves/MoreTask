@@ -8,7 +8,6 @@ import Toast from 'react-bootstrap/Toast'
 const AddTaskModal = ({ addTask }) => {
     const [nm_task, setNm_Task] = useState("");
     const [ds_task, setDs_Task] = useState("");
-    const [attention, setAttention] = useState(false);
     const [ob_owner, setOb_Owner] = useState("");
     const [dt_start, setDt_Start] = useState(new Date());
     const [dt_prediction, setDt_Prediction] = useState(new Date());
@@ -21,19 +20,17 @@ const AddTaskModal = ({ addTask }) => {
             const newTask = {
                 nm_task,
                 ds_task,
-                attention,
                 ob_owner,
                 dt_create: new Date(),
                 dt_start,
                 dt_prediction,
-                ob_status: { ds_status: "Pending", vl_order: "1" }
+                ds_status: "On Hold"
             }
             addTask(newTask);
 
             //clear fields
             setNm_Task("");
             setDs_Task("");
-            setAttention(false);
             setOb_Owner("");
             setDt_Start(new Date());
             setDt_Prediction(new Date());
@@ -61,23 +58,7 @@ const AddTaskModal = ({ addTask }) => {
                             />
                         </div>
                         <div className="input-group mb-2">
-                            <div className="input-group-text">
-                                <input
-                                    className="form-check-input mt-0"
-                                    type="checkbox"
-                                    checked={attention}
-                                    value={attention}
-                                    onChange={e => setAttention(!attention)}
-                                />
-                            </div>
-                            <input
-                                disabled
-                                type="text"
-                                className="form-control"
-                                value="Set As Main Task"
-                            />
-                        </div>
-                        <div className="input-group mb-2">
+
                             <select
                                 className="form-select"
                                 name="ob_owner"
@@ -87,6 +68,7 @@ const AddTaskModal = ({ addTask }) => {
                                 <option defaultValue value="" disabled>Set Assignee</option>
                                 <StaffSelectOptions />
                             </select>
+                            <span className="input-group-text" id="basic-addon1">Task Assignee</span>
                         </div>
                         <div className="form-group mb-2">
                             <div className="col-10 mb-2">

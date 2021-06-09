@@ -8,20 +8,20 @@ import Toast from 'react-bootstrap/Toast'
 const EditTaskModal = ({ current, updateTask }) => {
     const [nm_task, setNm_Task] = useState("");
     const [ds_task, setDs_Task] = useState("");
-    const [attention, setAttention] = useState(false);
     const [ob_owner, setOb_Owner] = useState("");
     const [dt_start, setDt_Start] = useState(new Date());
     const [dt_prediction, setDt_Prediction] = useState(new Date());
+    const [ds_status, setDs_Status] = useState("");
     const [errorToastShow, setErrorToastShow] = useState(false);
 
     useEffect(() => {
         if (current) {
             setNm_Task(current.nm_task);
             setDs_Task(current.ds_task);
-            setAttention(current.attention);
             setOb_Owner(current.taskName);
             setDt_Start(current.dt_start);
             setDt_Prediction(current.dt_prediction);
+            setDs_Status(current.ds_status);
         }
     }, [current]);
 
@@ -34,20 +34,20 @@ const EditTaskModal = ({ current, updateTask }) => {
                 id: current.id,
                 nm_task,
                 ds_task,
-                attention,
                 ob_owner,
                 dt_start,
-                dt_prediction
+                dt_prediction,
+                ds_status
             }
             updateTask(updTask);
 
             //clear fields
             setNm_Task("");
             setDs_Task("");
-            setAttention(false);
             setOb_Owner("");
             setDt_Start(new Date());
             setDt_Prediction(new Date());
+            setDs_Status("");
         }
     }
 
@@ -72,21 +72,18 @@ const EditTaskModal = ({ current, updateTask }) => {
                             />
                         </div>
                         <div className="input-group mb-2">
-                            <div className="input-group-text">
-                                <input
-                                    className="form-check-input mt-0"
-                                    type="checkbox"
-                                    checked={attention}
-                                    value={attention}
-                                    onChange={e => setAttention(!attention)}
-                                />
-                            </div>
-                            <input
-                                disabled
-                                type="text"
-                                className="form-control"
-                                value="Set As Main Task"
-                            />
+                            <select
+                                className="form-select"
+                                name="ds_status"
+                                value={ds_status}
+                                onChange={e => setDs_Status(e.target.value)}
+                            >
+                                <option defaultValue value="" disabled>Set Status</option>
+                                <option value="On Hold">On Hold</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <span className="input-group-text" id="basic-addon1">Task Status</span>
                         </div>
                         <div className="input-group mb-2">
                             <select
@@ -95,9 +92,10 @@ const EditTaskModal = ({ current, updateTask }) => {
                                 value={ob_owner}
                                 onChange={e => setOb_Owner(e.target.value)}
                             >
-                                <option defaultValue value="" disabled>Set Assignee</option>
+                                <option value="" disabled>Set Assignee</option>
                                 <StaffSelectOptions />
                             </select>
+                            <span className="input-group-text" id="basic-addon1">Task Assignee</span>
                         </div>
                         <div className="form-group mb-2">
                             <div className="col-10 mb-2">

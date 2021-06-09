@@ -22,32 +22,67 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
                 }
             ]
         });
-
     }
 
     return (
-        <li className="collection-item">
-            <div>
-                <a
-                    href="#edit-task-modal"
-                    className={`modal-trigger text-decoration-none h5 ${task.attention ? 'text-danger' : 'text-primary'
-                        }`}
-                    data-bs-toggle="modal"
-                    data-bs-target="#edit-task-modal"
-                    onClick={() => setCurrent(task)}
-                >
-                    {task.nm_task}
-                </a>
-                <br />
-                <span className="text-secondary">
-                    <span className="text-dark">
-                        Id #{task.id} </span>
-                         created by [
-                    <span className="text-dark">
-                        {task.ob_owner}]
-                    </span>
-                    {' '}on{' '} [<Moment format="MMMM Do YYYY, h:mm A">{task.dt_create}</Moment>]
+        // <li className="collection-item">
+        //     <div>
+        //         <a
+        //             href="#edit-task-modal"
+        //             className={`modal-trigger text-decoration-none h5 ${task.attention ? 'text-danger' : 'text-primary'
+        //                 }`}
+        //             data-bs-toggle="modal"
+        //             data-bs-target="#edit-task-modal"
+        //             onClick={() => setCurrent(task)}
+        //         >
+        //             {task.nm_task}
+        //         </a>
+        //         <br />
+        //         <span className="text-secondary">
+        //             <span className="text-dark">
+        //                 Id #{task.id} </span>
+        //                  created by [
+        //             <span className="text-dark">
+        //                 {task.ob_owner}]
+        //             </span>
+        //             {' '}on{' '} [<Moment format="MMMM Do YYYY, h:mm A">{task.dt_create}</Moment>]
+        //         </span>
+        //         <a
+        //             href="#!"
+        //             className="text-dark"
+        //             onClick={onDelete}
+        //         >
+        //             <i className="fa fa-fw fa-trash float-right" style={{ fontSize: '1em' }} />
+        //         </a>
+        //     </div>
+        // </li>
+
+        <div className="card">
+            <a
+                href="#edit-task-modal"
+                className={`modal-trigger text-decoration-none cardtitle noselect h5 ${task.attention ? 'text-danger' : 'text-primary'
+                    }`}
+                data-bs-toggle="modal"
+                data-bs-target="#edit-task-modal"
+                onClick={() => setCurrent(task)}
+            >
+                {task.nm_task}
+
+            </a>
+            <p className="text-black h6">
+                {task.ob_owner}
+            </p>
+            <span className="text-secondary">
+                <span className="text-dark">
+                    Id #{task.id}
                 </span>
+                {' '}created by [
+                    <span className="text-dark">
+                    {task.ob_owner}]
+                    </span>
+                {' '}on{' '} [<Moment format="MMMM Do YYYY, h:mm A">{task.dt_create}</Moment>]
+            </span>
+            <div className="d-flex justify-content-end">
                 <a
                     href="#!"
                     className="text-dark"
@@ -56,7 +91,9 @@ const TaskItem = ({ task, deleteTask, setCurrent }) => {
                     <i className="fa fa-fw fa-trash float-right" style={{ fontSize: '1em' }} />
                 </a>
             </div>
-        </li>
+
+
+        </div>
     )
 }
 

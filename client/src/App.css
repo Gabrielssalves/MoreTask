@@ -18,13 +18,120 @@ li {
     width: 30%;
 }
 
-/* .collection {
+/* workflow card layout */
+
+#kaban {
+    float:left;
+    position:relative;
+    margin-left: 12%;
+    margin-top: 1%;
+    width:100%;
+    height:auto;
+}
+
+#scroller {
+    float:left;
+    position:relative;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    overflow:auto;
+}
+
+#boards {
+    float:left;
+    position:relative;
+    width:auto;
+    height:auto;
+    margin-bottom:30px;
+}
+
+.board {
+    float:left;
+    position:relative;
+    width:300px;
+    height:auto;
+    margin:8px;
+    background-color:lightgray;
+    border-radius:3px;
+    box-shadow:1px 1px 1px rgba(0,0,0,.2);
+}
+
+.board header {
+    float:left;
+    width:100%;
+    padding:.5em;
+    background-color:lightgray;
+    text-transform:uppercase;
+    border-radius:3px 3px 0 0;
+}
+
+#board1 header {
+    background-color:#BC3425;
+    color:white;
+    font-weight: 600;
+}
+
+#board2 header {
+    background-color:#e6cb22;
+    color:white;
+    font-weight: 600;
+}
+
+#board3 header {
+    background-color:#11b82a;
+    color:white;
+    font-weight: 600;
+}
+
+.cards {
+    list-style-type:none;
+    float:left;
+    width:100%;
+    padding:4px 8px;
+}
+
+.card {
+    float:left;
+    width:100%;
+    height:auto;
+    background-color:white;
+    padding:10px;
+    margin:4px 0;
+    border-radius:3px;
+    box-shadow:1px 1px 1px rgba(0,0,0,.2); 
+    cursor:move; 
+    cursor:-webkit-grab; 
+    cursor:-moz-grab; 
+    cursor:grab;
+}
+
+.cardtitle {
+    float:left;
+    width:100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cards .is-moving {
+    background-color:white;
+    color:black
+}
+
+
+.collection {
     margin: 0.5rem 0 1rem 0;
     border: 1px solid #e0e0e0;
     border-radius: 2px;
     overflow: hidden;
     position: relative;
 }
+
+.collection.with-header .collection-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
+  }
 
 .collection .collection-item {
     background-color: #fff;
@@ -62,7 +169,7 @@ li {
 
 .collection a.collection-item:not(.active):hover {
     background-color: #ddd;
-} */
+}
 
 .center {
     text-align: center;
