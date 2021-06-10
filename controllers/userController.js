@@ -86,6 +86,7 @@ exports.loginUser = async (req, res, next) => {
       return res.status(401).send({ message: "Authentication failure" });
     }
   } catch (error) {
+    console.log(error)
     return res
       .status(401)
       .send({ message: "Authentication failure", error: error });
