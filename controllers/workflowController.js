@@ -8,11 +8,22 @@ exports.getUserWorkflows = async (req, res, next) => {
       .populate({
         path: 'Ls_Tasks',
         populate: {
-          path: 'Ob_User',
+          path: 'Ob_User'          
+        }
+      })
+      .populate({
+        path: 'Ls_Tasks',
+        populate: {
           path: 'Ls_Comments',
           populate: {
             path: 'Ob_User'
           }
+        }
+      })
+      .populate({
+        path: 'Ls_Tasks',
+        populate: {
+          path: 'Ob_Qwner'          
         }
       })
       .populate('Ob_Owner')
