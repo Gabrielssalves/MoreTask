@@ -82,7 +82,10 @@ exports.loginUser = async (req, res, next) => {
       return res.status(200).send({
         message: "Successfully authenticated",
         token: token,
-        admin: result.Fg_Admin
+        admin: result.Fg_Admin,
+        name: result.Nm_User,
+        email: result.Ds_Email,
+        login: result.Ds_Login
       });
     } else {
       return res.status(401).send({ message: "Authentication failure" });
