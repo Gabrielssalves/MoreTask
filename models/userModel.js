@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  Fg_Admin: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const UserModel = mongoose.model("User", UserSchema);

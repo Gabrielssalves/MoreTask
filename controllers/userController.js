@@ -71,6 +71,7 @@ exports.loginUser = async (req, res, next) => {
           email: result.Ds_Email,
           name: result.Nm_User,
           login: result.Ds_Login,
+          admin: result.Fg_Admin
         },
         process.env.JWT_KEY,
         {
@@ -81,6 +82,7 @@ exports.loginUser = async (req, res, next) => {
       return res.status(200).send({
         message: "Successfully authenticated",
         token: token,
+        admin: result.Fg_Admin
       });
     } else {
       return res.status(401).send({ message: "Authentication failure" });
