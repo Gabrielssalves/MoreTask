@@ -17,7 +17,6 @@ const updateTaskStatus = async (idTask, nextStatus = 1) => {
         Ds_Status: status[0].Ds_Status,
         Vl_Order: status[0].Vl_Order,
       },
-      Ob_Users: status[0].Ob_User,
     },
     { new: true }
   );
@@ -55,11 +54,11 @@ exports.createTask = async (req, res, next) => {
       Nm_Task: body.name,
       Ds_Task: body.description,
       Ob_Status: status[0],
-      Ob_User: status[0].Ob_User,
+      Ob_User: body.user,
       Ob_Owner: user.idUser,
       Dt_Prediction: body.dtPrediction,
       Ds_Status_Task: body.status,
-      Dt_Start: body.dtStart
+      Dt_Start: body.dtStart,
     });
 
     workflow.Ls_Tasks.push(result);
@@ -76,7 +75,6 @@ exports.createTask = async (req, res, next) => {
 
 exports.updateTaskById = async (req, res, next) => {
   try {
-    const user = req.user;
     const body = req.body;
     const idTask = req.params.idTask;
 
@@ -89,7 +87,8 @@ exports.updateTaskById = async (req, res, next) => {
         Ds_Task: body.description,
         Dt_Prediction: body.dtPrediction,
         Ds_Status_Task: body.status,
-        Dt_Start: body.dtStart
+        Dt_Start: body.dtStart,
+        Ob_User: body.user
       },
       { new: true }
     );

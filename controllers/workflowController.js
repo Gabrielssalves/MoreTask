@@ -22,7 +22,7 @@ exports.getUserWorkflowById = async (req, res, next) => {
   try {
     const user = req.user;
     const idWorkflow = req.params.idWorkflow;
-    const result = await WorkflowModel.findById(idWorkflow);
+    const result = await WorkflowModel.findById(idWorkflow).populate('Ob_User');
 
     if (result.Ob_Owner.valueOf().toString() !== user.idUser)
       return res.status(400).send({ message: "Workflow not found!" });
