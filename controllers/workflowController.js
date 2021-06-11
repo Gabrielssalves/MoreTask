@@ -7,6 +7,7 @@ exports.getUserWorkflows = async (req, res, next) => {
     const result = await WorkflowModel.find({ Ob_Owner: user.idUser })    
       .populate('Ls_Tasks')
       .populate('Ob_Owner')
+      .populate('Ob_User')
       .exec();
 
     return res.status(200).send({
