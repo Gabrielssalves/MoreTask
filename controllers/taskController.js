@@ -77,20 +77,25 @@ exports.updateTaskById = async (req, res, next) => {
   try {
     const body = req.body;
     const idTask = req.params.idTask;
+    var task = {};
 
     if (!idTask) return res.status(400).send({ message: "Enter the task id!" });
 
+    if (body.name)
+      task.Nm_Task = body.name
+    if (body.description)
+      task.Ds_Task = body.description
+    if (body.dtPrediction)
+      task.Dt_Prediction = body.dtPrediction
+    if (body.status)
+      task.Ds_Status_Task = body.status
+    if (body.user)
+      task.Ob_User = body.user
+
     const result = await TaskModel.findByIdAndUpdate(
       idTask,
-      {
-        Nm_Task: body.name,
-        Ds_Task: body.description,
-        Dt_Prediction: body.dtPrediction,
-        Ds_Status_Task: body.status,
-        Dt_Start: body.dtStart,
-        Ob_User: body.user
-      },
-      { new: true }
+      task,
+      { new: true}
     ).populate('Ob_User');
 
     return res.status(201).send({
