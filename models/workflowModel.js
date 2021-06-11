@@ -21,12 +21,10 @@ const WorkflowSchema = new mongoose.Schema({
         type: Number,
         require: true
       },
-      Ls_Users: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User"
-        },
-      ],
+      Ob_User: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      }
     }
   ],
   Ds_Marking: {

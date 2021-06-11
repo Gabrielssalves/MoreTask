@@ -6,6 +6,10 @@ const TaskController = require('../controllers/taskController')
 
 // router.get('/', login.mandatory, TaskController.getUserTasks);
 router.post('/', login.mandatory, TaskController.createTask);
-router.put('/:idTask', login.mandatory, TaskController.updateTaskStatus);
+router.post('/:idTask/comment', login.mandatory, TaskController.createCommentByTaskId);
+router.put('/:idTask/status', login.mandatory, TaskController.updateTaskStatus);
+router.patch('/:idTask', login.mandatory, TaskController.updateTaskById);
+router.patch('/:idTask/', login.mandatory, TaskController.updateTaskById);
+router.delete('/:idTask', login.mandatory, TaskController.deleteTaskById);
 
 module.exports = router;

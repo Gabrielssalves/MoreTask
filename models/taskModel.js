@@ -45,6 +45,9 @@ const TaskSchema = new mongoose.Schema({
       type: Number
     }
   },
+  Ds_Status_Task : {
+    type: String,
+  },
   Ds_Marking: {
     type: String,
   },
@@ -69,13 +72,11 @@ const TaskSchema = new mongoose.Schema({
     ref: "User",
     require: true,
   },
-  Ls_Users: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      require: true,
-    },
-  ],
+  Ob_User: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    require: true,
+  }
 });
 
 const TaskModel = mongoose.model("Task", TaskSchema);

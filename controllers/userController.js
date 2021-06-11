@@ -92,3 +92,63 @@ exports.loginUser = async (req, res, next) => {
       .send({ message: "Authentication failure", error: error });
   }
 };
+
+exports.updateUser = async (req, res, next) => {
+  try {
+    let user = req.body;
+    const login = user.login;
+
+    if (!user.login)
+      return res.status(400).send({ message: "Enter the login!" });
+
+    if (!user.password)
+      return res.status(400).send({ message: "Enter the password!" });
+
+    if (!user.name) return res.status(400).send({ message: "Enter the name!" });
+
+    if (!await User.findOne({ Ds_Login: login })) {
+      return res.status(400).send({ error: "User not found!" });
+    }
+    
+    const dataUser = await User.findOne({ Ds_Login: login });
+
+    user.hash = await bcrypt.hash(req.body.password, 10);
+
+    const result = await dataUser.updateOne({
+      Nm_User: user.name,
+      Ds_Email: user.email,
+      Ds_Login: user.login,
+      Ds_Password: user.hash,
+    }, { new: true });
+
+    result.Ds_Password = undefined;
+
+    return res.status(201).send({
+      message: "User successfully updated",
+      user: result,
+    });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    let user = req.user;
+    const login = user.login;
+
+    const dataUser = await User.findOne({ Ds_Login: login });
+
+    if (!dataUser) {
+      return res.status(400).send({ error: "User not found!" });
+    }
+
+    await dataUser.deleteOne();
+
+    return res.status(201).send({
+      message: "User successfully deleted",
+    });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
