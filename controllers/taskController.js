@@ -91,7 +91,7 @@ exports.updateTaskById = async (req, res, next) => {
         Ob_User: body.user
       },
       { new: true }
-    );
+    ).populate('Ob_User');
 
     return res.status(201).send({
       message: "Task successfully updated",
