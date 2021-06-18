@@ -59,6 +59,7 @@ exports.createTask = async (req, res, next) => {
       Dt_Prediction: body.dtPrediction,
       Ds_Status_Task: body.status,
       Dt_Start: body.dtStart,
+      Dt_Create: body.dtCreate
     });
 
     workflow.Ls_Tasks.push(result);
