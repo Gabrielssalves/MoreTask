@@ -56,7 +56,7 @@ const TaskSchema = new mongoose.Schema({
   },
   Dt_Create: {
     type: Date,
-    default: Date.now(),
+    required: true,
   },
   Dt_Start: {
     type: Date,
