@@ -92,7 +92,7 @@ exports.updateTaskById = async (req, res, next) => {
     if (body.user)
       task.Ob_User = body.user
     if (body.dtCreated)
-      task.Dt_Created = body.dtCreated
+      task.Dt_Create = body.dtCreate
 
     const result = await TaskModel.findByIdAndUpdate(
       idTask,
