@@ -91,6 +91,8 @@ exports.updateTaskById = async (req, res, next) => {
       task.Ds_Status_Task = body.status
     if (body.user)
       task.Ob_User = body.user
+    if (body.dtCreated)
+      task.Dt_Created = body.dtCreated
 
     const result = await TaskModel.findByIdAndUpdate(
       idTask,
